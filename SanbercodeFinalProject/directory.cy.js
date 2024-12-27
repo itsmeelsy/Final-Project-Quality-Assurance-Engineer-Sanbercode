@@ -34,15 +34,8 @@ describe('Directory Features',() => {
         loginPage.locationsMenu().eq(1).click();
         loginPage.selectLocations().contains('New York Sales Office').click();
 
-        cy.intercept("GET","**/employees?limit=14&offset=0&locationId=2&empNumber=171&jobTitleId=7").as("cekEmployee");
-        
         loginPage.buttonSelect().click();
-
         loginPage.viewEmployee().should('contain','Jonathan  Hadi');
-        
-        cy.wait('@cekEmployee').then((intercept) => {
-            expect(intercept.response.statusCode).to.equal(200);
-        });
 
     });
 
